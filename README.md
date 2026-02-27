@@ -18,7 +18,7 @@ cmake ..
 make -j$(nproc)
 ```
 
-Rebuild `flightlib` whenever you change C++ env code.
+Rebuild `flightlib` whenever you change C++ env code and dont forget to setup you racing environment in quadrotor_env.cpp before rebuilding flightlib.
 
 ## PPO_PER
 
