@@ -1,5 +1,6 @@
 # HelixRL
-![Alt Text](1.png)(2.png)
+![Alt Text](1.png)
+(![Alt Text](2.png)
 
 RL workspace for quadrotor simulation and control.
 
