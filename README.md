@@ -1,4 +1,5 @@
 # HelixRL
+![Alt Text](path/to/image.png)
 
 RL workspace for quadrotor simulation and control.
 
