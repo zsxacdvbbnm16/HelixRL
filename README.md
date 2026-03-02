@@ -2,7 +2,7 @@
 <img src="1.png" width="400">                   <img src="2.png" width="400">
 
 
-RL unity flightmare simulation for quadrotor drone racing and control.
+RL unity flightmare simulation for quadrotor drone racing and control. This code the extension of the https://github.com/uzh-rpg/flightmare , we made several changes on the top of flighmare simulator codes.
 
 ## Setup
 
