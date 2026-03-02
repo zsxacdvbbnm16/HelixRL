@@ -1,5 +1,5 @@
 # HelixRL
-<img src="1.png" width="200">  <img src="2.png" width="200">
+<img src="1.png" width="400">                   <img src="2.png" width="400">
 
 
 RL workspace for quadrotor simulation and control.
