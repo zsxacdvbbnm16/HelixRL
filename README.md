@@ -63,9 +63,12 @@ If you use this project, please cite the following paper:
 **Song, Y., et al. (2021). Flightmare: A Flexible Quadrotor Simulator.**
 
 ```bibtex
-@inproceedings{song2021flightmare,
-  title={Flightmare: A Flexible Quadrotor Simulator},
-  author={Song, Yunlong and Naji, Selim and Kaufmann, Elia and Loquercio, Antonio and Scaramuzza, Davide},
-  booktitle={Conference on Robot Learning},
-  year={2021}
+@misc{song2021flightmareflexiblequadrotorsimulator,
+      title={Flightmare: A Flexible Quadrotor Simulator}, 
+      author={Yunlong Song and Selim Naji and Elia Kaufmann and Antonio Loquercio and Davide Scaramuzza},
+      year={2021},
+      eprint={2009.00563},
+      archivePrefix={arXiv},
+      primaryClass={cs.RO},
+      url={https://arxiv.org/abs/2009.00563}, 
 }
