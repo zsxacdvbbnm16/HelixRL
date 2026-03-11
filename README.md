@@ -1,11 +1,13 @@
 # HelixRL
+<img src="1.png" width="400">                   <img src="2.png" width="400">
 
-RL workspace for quadrotor simulation and control.
+
+RL unity flightmare simulation for quadrotor drone racing and control. This code the extension of the https://github.com/uzh-rpg/flightmare , we made several changes on the top of flighmare simulator codes.
 
 ## Setup
 
 ```bash
-git clone https://github.com/sadbhavsingh16/HelixRL.git
+git clone https://github.com/zsxacdvbbnm16/HelixRL
 cd HelixRL
 ```
 
@@ -18,7 +20,7 @@ cmake ..
 make -j$(nproc)
 ```
 
-Rebuild `flightlib` whenever you change C++ env code.
+Rebuild `flightlib` whenever you change C++ env code and dont forget to setup you racing environment in quadrotor_env.cpp before rebuilding flightlib.
 
 ## PPO_PER
 
