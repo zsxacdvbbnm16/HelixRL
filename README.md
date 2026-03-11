@@ -22,6 +22,6 @@ Rebuild `flightlib` whenever you change C++ env code and dont forget to setup yo
 ## PPO_PER
 
 ```bash
-cd /home/golgapha/Desktop/flightmare
+cd /flightmare
 python3 flightrl/examples/ppo2_per.py
 ```
