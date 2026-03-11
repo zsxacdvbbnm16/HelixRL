@@ -13,7 +13,7 @@ option(BUILD_BENCH "Building the benchmark." OFF)
 option(ENABLE_FAST "Build with optimizations for speed" ON)
 option(ENABLE_BLAS "Build using BLAS and LAPACK libraries" OFF)
 option(ENABLE_PARALLEL "Build using openmp parallelization" ON)
-option(EIGEN_FROM_SYSTTEM "Use the system-provided Eigen" ON)
+option(EIGEN_FROM_SYSTEM "Use the system-provided Eigen" ON)
 set(
   EIGEN_ALTERNATIVE "" CACHE STRING
   "Path to alternative Eigen, autodownload if blank"
@@ -24,7 +24,7 @@ set(
 ################################################################################
 
 message(STATUS "======> Setup Dependencies")
-if(EIGEN_FROM_SYSTTEM)
+if(EIGEN_FROM_SYSTEM)
   find_package(Eigen3 3.3.4 QUIET)
   if(EIGEN3_FOUND)
     message(STATUS "Using system provided Eigen.")
@@ -207,6 +207,12 @@ else()
     zmq
     zmqpp
     stdc++fs)
+  # Ensure OpenMP runtime is linked when parallelization is enabled
+  if(ENABLE_PARALLEL)
+    if(TARGET OpenMP::OpenMP_CXX)
+      target_link_libraries(${PROJECT_NAME} PUBLIC OpenMP::OpenMP_CXX)
+    endif()
+  endif()
   set(LIBRARY_NAME ${PROJECT_NAME})
   set_target_properties(${PROJECT_NAME} PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
 endif()
@@ -257,6 +263,11 @@ if(BUILD_TESTS AND FLIGHTLIB_TEST_SOURCES)
     ${LIBRARY_NAME}
     gtest
     gtest_main)
+  if(ENABLE_PARALLEL)
+    if(TARGET OpenMP::OpenMP_CXX)
+      target_link_libraries(test_lib PUBLIC OpenMP::OpenMP_CXX)
+    endif()
+  endif()
 add_test(test_lib test_lib)
 endif()
 
@@ -267,6 +278,11 @@ if(BUILD_UNITY_BRIDGE_TESTS AND FLIGHTLIB_UNITY_BRIDGE_TEST_SOURCES)
     ${LIBRARY_NAME}
     gtest
     gtest_main)
+  if(ENABLE_PARALLEL)
+    if(TARGET OpenMP::OpenMP_CXX)
+      target_link_libraries(test_unity_bridge PUBLIC OpenMP::OpenMP_CXX)
+    endif()
+  endif()
 add_test(test_unity_bridge test_unity_bridge)
 endif()
 

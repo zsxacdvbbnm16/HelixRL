@@ -113,10 +113,22 @@ bool UnityBridge::getRender(const FrameID frame_id) {
     pub_msg_.vehicles[idx].rotation = quaternionRos2Unity(quad_state.q());
   }
 
+  // Debug gate info
+  logger_.info("Publishing %d objects to Unity", static_objects_.size());
+  
   for (size_t idx = 0; idx < pub_msg_.objects.size(); idx++) {
     std::shared_ptr<StaticObject> gate = static_objects_[idx];
     pub_msg_.objects[idx].position = positionRos2Unity(gate->getPosition());
     pub_msg_.objects[idx].rotation = quaternionRos2Unity(gate->getQuaternion());
+    
+    // Log each gate's info for debugging
+    logger_.info("Gate %d: ID=%s, PrefabID=%s, Position=[%.2f, %.2f, %.2f]", 
+                idx, 
+                pub_msg_.objects[idx].ID.c_str(), 
+                pub_msg_.objects[idx].prefab_ID.c_str(),
+                pub_msg_.objects[idx].position[0], 
+                pub_msg_.objects[idx].position[1], 
+                pub_msg_.objects[idx].position[2]);
   }
 
   // create new message object
@@ -185,11 +197,25 @@ bool UnityBridge::addQuadrotor(std::shared_ptr<Quadrotor> quad) {
 
 bool UnityBridge::addStaticObject(std::shared_ptr<StaticObject> static_object) {
   Object_t object_t;
-  object_t.ID = static_object->getID();
+  
+  // Make sure each gate has a unique ID by appending the object count if ID is generic
+  std::string obj_id = static_object->getID();
+  if (obj_id == "gate") {
+    obj_id = obj_id + "_" + std::to_string(static_objects_.size());
+    // Modify the original object's ID
+    const_cast<StaticObject*>(static_object.get())->setID(obj_id);
+  }
+  
+  object_t.ID = obj_id;
   object_t.prefab_ID = static_object->getPrefabID();
   object_t.position = positionRos2Unity(static_object->getPosition());
   object_t.rotation = quaternionRos2Unity(static_object->getQuaternion());
   object_t.size = scalarRos2Unity(static_object->getSize());
+  
+  logger_.info("Added static object: ID=%s, PrefabID=%s, Position=[%.2f, %.2f, %.2f]", 
+              obj_id.c_str(), 
+              object_t.prefab_ID.c_str(), 
+              object_t.position[0], object_t.position[1], object_t.position[2]);
 
   static_objects_.push_back(static_object);
   settings_.objects.push_back(object_t);

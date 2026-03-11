@@ -22,6 +22,9 @@ class StaticObject {
   virtual Vector<3> getSize(void) { return size_; };
   const std::string& getID(void) { return id_; };
   const std::string& getPrefabID(void) { return prefab_id_; };
+  
+  // Allow changing the ID (used to ensure uniqueness)
+  void setID(const std::string& new_id) { id_ = new_id; };
 
  private:
   std::string id_;

@@ -4,20 +4,17 @@
 
 RL unity flightmare simulation for quadrotor drone racing and control. This code the extension of the https://github.com/uzh-rpg/flightmare , we made several changes on the top of flighmare simulator codes.
 
-## Setup
-
 ```bash
 git clone https://github.com/zsxacdvbbnm16/HelixRL
 cd HelixRL
-```
-
-## Build (C++ env)
-
-```bash
+export FLIGHTMARE_PATH=$(pwd)
 cd flightlib
 mkdir -p build && cd build
 cmake ..
 make -j$(nproc)
+cd ../..
+pip3 install -e flightlib
+pip3 install -e .
 ```
 
 Rebuild `flightlib` whenever you change C++ env code and dont forget to setup you racing environment in quadrotor_env.cpp before rebuilding flightlib.

@@ -29,6 +29,14 @@ add_subdirectory(${PROJECT_SOURCE_DIR}/externals/googletest-src
                  ${PROJECT_SOURCE_DIR}/externals/googletest-build
                  EXCLUDE_FROM_ALL)
 
+# Add custom command to run ranlib on the built library
+add_custom_target(ranlib_gtest ALL
+  COMMAND ranlib ${CMAKE_BINARY_DIR}/lib/libgtest.a
+  COMMAND ranlib ${CMAKE_BINARY_DIR}/lib/libgtest_main.a
+  DEPENDS gtest gtest_main
+  COMMENT "Running ranlib on gtest libraries"
+)
+
 # The gtest/gtest_main targets carry header search path
 # dependencies automatically when using CMake 2.8.11 or
 # later. Otherwise we have to add them here ourselves.

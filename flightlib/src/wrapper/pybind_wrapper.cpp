@@ -31,6 +31,12 @@ PYBIND11_MODULE(flightgym, m) {
     .def("getObsDim", &VecEnv<QuadrotorEnv>::getObsDim)
     .def("getActDim", &VecEnv<QuadrotorEnv>::getActDim)
     .def("getExtraInfoNames", &VecEnv<QuadrotorEnv>::getExtraInfoNames)
+    .def("getRewDim", [](const VecEnv<QuadrotorEnv>& env) { return 1; })
+    .def("getRewardNames", [](const VecEnv<QuadrotorEnv>& env) {
+      return std::vector<std::string>{};
+    })
+    .def("getImgWidth", [](const VecEnv<QuadrotorEnv>& env) { return 320; })
+    .def("getImgHeight", [](const VecEnv<QuadrotorEnv>& env) { return 240; })
     .def("__repr__", [](const VecEnv<QuadrotorEnv>& a) {
       return "RPG Drone Racing Environment";
     });

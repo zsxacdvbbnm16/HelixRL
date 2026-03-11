@@ -1,16 +1,46 @@
 quadrotor_env:
-   camera: no
-   sim_dt: 0.02 
-   max_t: 5.0
-   add_camera: yes
+  camera: yes
+  sim_dt: 0.02
+  max_t: 20.0   # Longer episodes to allow passing multiple gates
+  add_camera: yes
+  gate_radius: 1.0
+  helix_radius: 2.0
+  helix_pitch: 1.0
+  helix_angular_velocity: 0.5
+  gate_reward: 10.0   # Large reward for passing through a gate
+
+# PER (Prioritized Experience Replay) parameters
+# per:
+#   buffer_capacity: 100000    # Maximum number of experiences to store
+#   alpha: 0.6                # Priority exponent (0.0 = uniform, 1.0 = fully prioritized)
+#   beta: 0.4                 # Importance sampling exponent (starts at 0.4, anneals to 1.0)
+#   beta_increment: 0.001     # How much to increase beta per training step
+#   epsilon: 1e-6             # Small constant to prevent zero priorities
+
+# Gaussian noise parameters
+gaussian_noise:
+  action_noise:
+    std_dev: 0.1            # Standard deviation for action exploration noise
+    decay_rate: 0.995       # Noise decay per episode (for exploration annealing)
+    min_std_dev: 0.01       # Minimum noise level
+  observation_noise:
+    std_dev: 0.005          # Standard deviation for sensor noise simulation
+    enabled: true           # Whether to add observation noise
+  state_noise:
+    std_dev: 0.01           # Standard deviation for state perturbations
+    position_std: 2.0       # Std dev for position randomization during reset
+    velocity_std: 0.5       # Std dev for velocity randomization during reset
+    orientation_std: 0.1    # Std dev for orientation randomization during reset
+    gate_offset_std: 0.2    # Std dev for gate positioning randomization
 
 quadrotor_dynamics:
-  mass: 0.73
+  mass: 0.83
   arm_l: 0.17
   motor_omega_min: 150.0 # motor rpm min
   motor_omega_max: 3000.0 # motor rpm max
   motor_tau: 0.0001 # motor step response
-  thrust_map: [1.3298253500372892e-06, 0.0038360810526746033, -1.7689986848125325]
+  thrust_map: [1.3298253500372891e-06, 0.0038360810526746033, 
+      -1.7689986848125325]
   kappa: 0.016 # rotor drag coeff
   omega_max: [6.0, 6.0, 6.0]  # body rate constraint (x, y, z) 
 

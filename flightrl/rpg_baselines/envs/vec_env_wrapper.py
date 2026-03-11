@@ -26,6 +26,9 @@ class FlightEnvVec(VecEnv):
                                     len(self._extraInfoNames)], dtype=np.float32)
         self.rewards = [[] for _ in range(self.num_envs)]
 
+        # Add dt attribute to match sim_dt from C++ environment
+        self.dt = 0.02
+
         self.max_episode_steps = 300
 
     def seed(self, seed=0):

@@ -31,3 +31,21 @@ def TensorboardLauncher(directory_path):
     url = tb.launch()
     print("[RAISIM_GYM] Tensorboard session created: "+url)
     webbrowser.open_new(url)
+
+def save_model(model, save_path, model_name):
+    """
+    Save a model checkpoint during training.
+    
+    Args:
+        model: The model to save
+        save_path: The directory path to save to
+        model_name: Name for the saved checkpoint
+    """
+    try:
+        full_path = os.path.join(save_path, model_name)
+        model.save(full_path)
+        print(f"[FLIGHTMARE] Saved checkpoint: {full_path}")
+        return True
+    except Exception as e:
+        print(f"[FLIGHTMARE] Failed to save checkpoint: {e}")
+        return False
