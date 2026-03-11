@@ -54,10 +54,12 @@ python3 flightrl/examples/ppo2_per.py
 ```
 Citation
 If you use this simulator or our HelixRL extensions in your research, please cite the original Flightmare paper:
-bibtex
-@inproceedings{song2020flightmare,
+@inproceedings{song2021flightmare,
   title={Flightmare: A Flexible Quadrotor Simulator},
   author={Song, Yunlong and Naji, Selim and Kaufmann, Elia and Loquercio, Antonio and Scaramuzza, Davide},
-  booktitle={Conference on Robot Learning (CoRL)},
-  year={2020}
+  booktitle={Proceedings of the 2020 Conference on Robot Learning (CoRL)},
+  pages={1147--1157},
+  year={2021},
+  publisher={PMLR}
 }
+
